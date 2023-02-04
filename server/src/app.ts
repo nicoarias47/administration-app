@@ -2,6 +2,7 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import ConfigDIC from "./config/DIConfig";
+import { initUserModule } from "./modules/user/user_module";
 
 const app = express();
 
@@ -11,6 +12,8 @@ const container = ConfigDIC();
 
 app.use(cors());
 app.use(express.json());
+
+initUserModule(app, container);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(err);
